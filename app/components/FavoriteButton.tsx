@@ -18,7 +18,7 @@ export default function FavoriteButton({
 
   function handleToggle() {
     const added = toggleWishlist(slug);
-    showToast(added ? "Added to wishlist" : "Removed from wishlist", title);
+    showToast(added ? "Added to favorites" : "Removed from favorites", title);
   }
 
   return (

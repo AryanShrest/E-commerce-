@@ -25,22 +25,22 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
         <div
           role="status"
           aria-live="polite"
-          className="fixed bottom-5 right-5 z-50 w-[calc(100%-2.5rem)] max-w-[30rem] rounded-xl border border-green-200 bg-green-50 p-5 text-green-900 shadow-lg"
+          className="fixed left-1 right-1 top-1 z-50 w-auto rounded-lg border border-green-200 bg-green-50 px-3 py-2 text-green-900 shadow-md md:left-auto md:right-5 md:top-auto md:bottom-5 md:w-[calc(100%-2.5rem)] md:max-w-[30rem] md:rounded-xl md:p-5 md:shadow-lg"
         >
           <button
             type="button"
             onClick={() => setMessage(null)}
-            aria-label="Dismiss cart confirmation"
-            className="absolute right-4 top-4 text-xl leading-none text-gray-500 transition hover:text-gray-900"
+            aria-label="Dismiss confirmation"
+            className="absolute right-2 top-1 text-base leading-none text-gray-500 transition hover:text-gray-900 md:right-4 md:top-4 md:text-xl"
           >
             ×
           </button>
-          <p className="pr-8 font-semibold">{message.title}</p>
-          <p className="mt-2 text-sm">{message.detail}</p>
+          <p className="pr-6 text-[10px] font-semibold leading-4 md:pr-8 md:text-base md:leading-normal">{message.title}</p>
+          <p className="mt-0.5 text-[10px] leading-4 md:mt-2 md:text-sm md:leading-normal">{message.detail}</p>
           <button
             type="button"
             onClick={() => setMessage(null)}
-            className="mt-3 text-xs font-semibold text-green-900 underline underline-offset-2"
+            className="mt-3 hidden text-xs font-semibold text-green-900 underline underline-offset-2 md:inline-block"
           >
             Continue shopping
           </button>

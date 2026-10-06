@@ -113,9 +113,9 @@ export default function AccountPageClient({ initialMode }: { initialMode: "login
 
   return (
     <main className="flex flex-1 items-center justify-center bg-gray-50 px-2 py-6 sm:px-6 sm:py-10">
-      <section className={`w-full rounded-2xl bg-white shadow-lg ${mode === "signup" ? "max-w-4xl p-4 sm:p-10" : "max-w-md px-4 py-9 sm:p-10"}`}>
+      <section className={`w-full rounded-2xl bg-white shadow-lg ${mode === "signup" ? "max-w-4xl p-4 sm:p-10" : "max-w-md px-4 py-12 sm:p-10"}`}>
         <div className={`text-center ${mode === "login" || mode === "signup" ? "mb-4 sm:mb-7" : "mb-7"}`}>
-          <h1 className={`font-bold text-gray-900 ${mode === "login" || mode === "signup" ? "text-base sm:text-2xl" : "text-2xl"}`}>
+          <h1 className={`font-bold text-gray-900 ${mode === "login" ? "text-base sm:text-2xl" : "text-2xl"}`}>
             {mode === "login" ? "Welcome back" : "Create an account"}
           </h1>
           <p className={`text-gray-500 ${mode === "login" || mode === "signup" ? "mt-1 text-[10px] sm:mt-2 sm:text-sm" : "mt-2 text-sm"}`}>

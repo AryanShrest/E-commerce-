@@ -18,7 +18,7 @@ export default function AddToCartButton({
 
   function handleAddToCart() {
     addItem(slug, quantity);
-    showToast("Added to cart", `${quantity} × ${title}`);
+    showToast("Added to cart", quantity === 1 ? title : `${quantity} × ${title}`);
   }
 
   return (
