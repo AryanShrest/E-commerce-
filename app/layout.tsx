@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ToastProvider } from "./components/ToastProvider";
 import { CartProvider } from "./components/CartProvider";
 import { WishlistProvider } from "./components/WishlistProvider";
+import MobileBottomNav from "./components/MobileBottomNav";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,7 +26,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <CartProvider>
           <WishlistProvider>
-            <ToastProvider>{children}</ToastProvider>
+            <ToastProvider>
+              {children}
+              <MobileBottomNav />
+            </ToastProvider>
           </WishlistProvider>
         </CartProvider>
       </body>

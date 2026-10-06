@@ -9,13 +9,13 @@ export default function ProductDetailClient({ product }: { product: Product }) {
   const quantity = Math.max(1, Number.parseInt(quantityInput, 10) || 1);
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2 sm:gap-3">
       {/* Quantity stepper */}
-      <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+      <div className="flex items-center overflow-hidden rounded-md border border-gray-300 sm:rounded-lg">
         <button
           type="button"
           onClick={() => setQuantityInput(String(Math.max(1, quantity - 1)))}
-          className="px-3 py-2 text-gray-600 hover:bg-gray-100 transition text-lg leading-none"
+          className="px-2 py-1.5 text-base leading-none text-gray-600 transition hover:bg-gray-100 sm:px-3 sm:py-2 sm:text-lg"
           aria-label="Decrease quantity"
         >
           −
@@ -31,12 +31,12 @@ export default function ProductDetailClient({ product }: { product: Product }) {
           }}
           onBlur={() => setQuantityInput(String(quantity))}
           aria-label="Product quantity"
-          className="quantity-input w-14 border-0 bg-transparent py-2 text-center text-sm font-semibold text-gray-900 outline-none"
+          className="quantity-input w-8 border-0 bg-transparent py-1.5 text-center text-xs font-semibold text-gray-900 outline-none sm:w-14 sm:py-2 sm:text-sm"
         />
         <button
           type="button"
           onClick={() => setQuantityInput(String(quantity + 1))}
-          className="px-3 py-2 text-gray-600 hover:bg-gray-100 transition text-lg leading-none"
+          className="px-2 py-1.5 text-base leading-none text-gray-600 transition hover:bg-gray-100 sm:px-3 sm:py-2 sm:text-lg"
           aria-label="Increase quantity"
         >
           +
@@ -48,14 +48,14 @@ export default function ProductDetailClient({ product }: { product: Product }) {
         slug={product.slug}
         title={product.title}
         quantity={quantity}
-        className="flex-1 rounded-lg py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
+        className="flex-1 rounded-md py-1.5 text-xs font-semibold text-white transition hover:opacity-90 sm:rounded-lg sm:py-2.5 sm:text-sm"
       />
 
       {/* Wishlist */}
       <FavoriteButton
         slug={product.slug}
         title={product.title}
-        className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 text-gray-500 transition hover:border-purple-700 hover:text-purple-700"
+        className="flex h-8 w-8 items-center justify-center rounded-md border border-gray-300 text-xs text-gray-500 transition hover:border-purple-700 hover:text-purple-700 sm:h-10 sm:w-10 sm:rounded-lg sm:text-base"
       />
     </div>
   );

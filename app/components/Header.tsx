@@ -65,12 +65,13 @@ export default function Header() {
   const [shippingState, setShippingState] = useState("NY");
   const [shippingMenuOpen, setShippingMenuOpen] = useState(false);
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <header className="bg-white shadow-sm">
-      <div className="mx-auto max-w-7xl px-6 py-3">
-        <div className="flex items-center justify-between gap-8">
+      <div className="mx-auto max-w-7xl px-4 py-2 sm:px-6 sm:py-3">
+        <div className="flex items-center justify-between gap-3 sm:gap-8">
           {/* Logo */}
           <Link href="/" aria-label="CoreCraft Technologies home" className="flex flex-shrink-0 items-center">
             <Image
@@ -78,12 +79,12 @@ export default function Header() {
               alt="CoreCraft Technologies"
               width={324}
               height={229}
-              className="h-16 w-auto object-contain"
+              className="h-10 w-auto object-contain sm:h-16"
             />
           </Link>
 
           {/* Search */}
-          <div className="flex-1 max-w-2xl">
+          <div className="hidden max-w-2xl flex-1 md:block">
             <div className="relative">
               <input
                 type="text"
@@ -98,7 +99,7 @@ export default function Header() {
           </div>
 
           {/* Right icons */}
-          <div className="flex items-center gap-5 flex-shrink-0">
+          <div className="flex flex-shrink-0 items-center gap-3 sm:gap-5">
             <div className="relative">
               <span className="block text-xs text-gray-500">Ship to</span>
               <button
@@ -109,7 +110,7 @@ export default function Header() {
                 }}
                 aria-expanded={shippingMenuOpen}
                 aria-haspopup="listbox"
-                className="flex items-center gap-1 text-sm font-medium text-gray-900"
+                className="flex items-center gap-1 text-xs font-medium text-gray-900 sm:text-sm"
               >
                 {shippingState}
                 <i className="fas fa-chevron-down text-xs text-gray-500" aria-hidden="true" />
@@ -140,7 +141,7 @@ export default function Header() {
                 </ul>
               )}
             </div>
-            <div className="relative">
+            <div className="relative hidden sm:block">
               <button
                 type="button"
                 onClick={() => {
@@ -180,7 +181,7 @@ export default function Header() {
             <Link
               href="/wishlist"
               aria-label={`Wishlist with ${favoriteSlugs.length} ${favoriteSlugs.length === 1 ? "item" : "items"}`}
-              className="relative text-lg text-gray-700 transition hover:text-purple-700"
+              className="relative hidden text-lg text-gray-700 transition hover:text-purple-700 sm:block"
             >
               <i className="far fa-heart" aria-hidden="true" />
               {favoriteSlugs.length > 0 && (
@@ -192,7 +193,7 @@ export default function Header() {
             <Link
               href="/cart"
               aria-label={`Shopping cart with ${itemCount} ${itemCount === 1 ? "item" : "items"}`}
-              className="relative text-lg text-gray-700 transition hover:text-purple-700"
+              className="relative hidden text-lg text-gray-700 transition hover:text-purple-700 sm:block"
             >
               <i className="fas fa-shopping-cart" aria-hidden="true" />
               {itemCount > 0 && (
@@ -201,9 +202,28 @@ export default function Header() {
                 </span>
               )}
             </Link>
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen((open) => !open);
+                setShippingMenuOpen(false);
+              }}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+              className="text-lg text-gray-800 sm:hidden"
+            >
+              <i className={`fas ${mobileMenuOpen ? "fa-times" : "fa-bars"}`} aria-hidden="true" />
+            </button>
           </div>
         </div>
-
+        {mobileMenuOpen && (
+          <nav className="mt-3 grid grid-cols-2 gap-2 border-t border-gray-100 pt-3 sm:hidden">
+            <Link href="/wines" onClick={() => setMobileMenuOpen(false)} className="rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">Shop all wines</Link>
+            <Link href="/account?mode=login" onClick={() => setMobileMenuOpen(false)} className="rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">Login</Link>
+            <Link href="/account?mode=signup" onClick={() => setMobileMenuOpen(false)} className="rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">Register</Link>
+            <Link href="/wishlist" onClick={() => setMobileMenuOpen(false)} className="rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">Wishlist ({favoriteSlugs.length})</Link>
+          </nav>
+        )}
       </div>
     </header>
   );

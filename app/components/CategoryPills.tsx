@@ -10,20 +10,20 @@ const categories = [
 
 export default function CategoryPills() {
   return (
-    <section className="max-w-7xl mx-auto px-6 pb-8">
-      <div className="flex flex-wrap items-center justify-center gap-3">
+    <section className="mx-auto max-w-7xl overflow-hidden px-4 pb-5 sm:px-6 sm:pb-8">
+      <div className="category-scroll flex items-center justify-start gap-2 overflow-x-auto sm:flex-wrap sm:justify-center sm:gap-3">
         {categories.map(({ label, slug, color, border }) => (
           <Link
             key={label}
             href={`/wines/${slug}`}
-            className="flex items-center gap-2 px-5 py-2.5 bg-white border border-gray-200 rounded-full hover:shadow-md transition group"
+            className="flex shrink-0 items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 transition hover:shadow-md group sm:px-5 sm:py-2.5"
             style={{ ["--hover-border" as string]: "#4B1D7B" }}
           >
             <span
-              className="w-6 h-6 rounded-full flex-shrink-0 border-2"
+              className="h-5 w-5 flex-shrink-0 rounded-full border-2 sm:h-6 sm:w-6"
               style={{ backgroundColor: color, borderColor: border }}
             />
-            <span className="text-sm text-gray-700 group-hover:text-purple-700 font-medium">{label}</span>
+            <span className="text-xs font-medium text-gray-700 group-hover:text-purple-700 sm:text-sm">{label}</span>
           </Link>
         ))}
       </div>

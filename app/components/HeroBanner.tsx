@@ -27,44 +27,47 @@ export default function HeroBanner() {
   const { img, headline, sub } = slides[active];
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-8">
-      <div className="relative rounded-2xl overflow-hidden h-80">
+    <section className="mx-auto max-w-7xl px-4 py-3 sm:px-6 sm:py-8">
+      <div className="relative h-56 overflow-hidden rounded-xl sm:h-96 sm:rounded-2xl">
         <img src={img} alt={headline} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/40" />
 
         <button
           onClick={prev}
-          className="absolute left-5 top-1/2 -translate-y-1/2 w-9 h-9 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center transition z-10"
+          aria-label="Previous promotion"
+          className="absolute left-2 top-1/2 z-10 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-black/70 sm:left-5 sm:h-9 sm:w-9"
         >
           <i className="fas fa-chevron-left text-sm" />
         </button>
         <button
           onClick={next}
-          className="absolute right-5 top-1/2 -translate-y-1/2 w-9 h-9 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center transition z-10"
+          aria-label="Next promotion"
+          className="absolute right-2 top-1/2 z-10 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-black/70 sm:right-5 sm:h-9 sm:w-9"
         >
           <i className="fas fa-chevron-right text-sm" />
         </button>
 
-        <div className="relative h-full flex flex-col items-center justify-center text-white z-10 px-8">
-          <h2 className="text-4xl md:text-5xl font-semibold mb-3 text-center" style={{ fontFamily: "'Playfair Display', serif" }}>
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-8 text-white">
+          <h2 className="mb-1 text-center text-lg font-semibold sm:mb-3 sm:text-4xl md:text-5xl" style={{ fontFamily: "'Playfair Display', serif" }}>
             {headline}
           </h2>
-          <div className="w-16 h-px bg-white/60 mb-3" />
-          <p className="text-base md:text-lg mb-6 text-white/90">{sub}</p>
+          <div className="mb-1 h-px w-10 bg-white/60 sm:mb-3 sm:w-16" />
+          <p className="mb-2 text-center text-[10px] text-white/90 sm:mb-6 sm:text-base md:text-lg">{sub}</p>
           <Link
             href="/wines"
-            className="text-white px-6 py-2.5 rounded-md text-sm font-semibold tracking-wide transition hover:opacity-90"
+            className="rounded-md px-4 py-1.5 text-[10px] font-semibold tracking-wide text-white transition hover:opacity-90 sm:px-6 sm:py-2.5 sm:text-sm"
             style={{ backgroundColor: "#2E1054" }}
           >
             SHOP NOW
           </Link>
         </div>
 
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+        <div className="absolute bottom-2 left-1/2 z-10 flex -translate-x-1/2 gap-2 sm:bottom-4">
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}
+              aria-label={`Show promotion ${i + 1}`}
               className={`h-1.5 rounded-full transition-all ${i === active ? "w-6 bg-white/90" : "w-6 bg-white/40"}`}
             />
           ))}

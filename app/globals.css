@@ -17,6 +17,9 @@ body {
 }
 
 .product-scroll {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
   scroll-behavior: smooth;
   scrollbar-width: none;
 }
@@ -33,4 +36,36 @@ body {
 .quantity-input::-webkit-outer-spin-button {
   margin: 0;
   -webkit-appearance: none;
+}
+
+.category-scroll {
+  scrollbar-width: none;
+}
+
+.category-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  body {
+    padding-bottom: 4.25rem;
+  }
+
+  .product-scroll--carousel {
+    grid-auto-columns: minmax(135px, 42vw);
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    gap: 10px;
+    scroll-snap-type: x proximity;
+    padding-bottom: 4px;
+  }
+
+  .product-scroll--carousel > * {
+    scroll-snap-align: start;
+  }
+
+  .product-scroll--listing {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
 }

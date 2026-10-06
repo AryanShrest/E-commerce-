@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: "#2E1054" }} className="text-white">
+    <footer style={{ backgroundColor: "#2E1054" }} className="hidden text-white sm:block">
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Brand block */}
         <div className="flex flex-col gap-4">

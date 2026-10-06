@@ -30,6 +30,7 @@ const categoryNames: Record<string, string> = {
 export default function WineListingClient({ category }: { category?: string }) {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [openFilters, setOpenFilters] = useState<string[]>(["Category", "Price"]);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [minimumPrice, setMinimumPrice] = useState("2.99");
   const [maximumPrice, setMaximumPrice] = useState("605.99");
   const [sortOrder, setSortOrder] = useState("Newest");
@@ -75,6 +76,76 @@ export default function WineListingClient({ category }: { category?: string }) {
     setMaximumPrice("605.99");
   }
 
+  function renderFilterOptions() {
+    return (
+      <>
+        <section className="border-t border-gray-100 py-3">
+          <button type="button" onClick={() => toggleFilter("Category")} className="flex w-full items-center justify-between text-xs font-semibold uppercase text-gray-700">
+            <span>Category <span className="ml-1 text-[9px] font-normal text-gray-400">(3)</span></span>
+            <i className={`fas fa-chevron-${openFilters.includes("Category") ? "up" : "down"} text-[10px]`} aria-hidden="true" />
+          </button>
+          {openFilters.includes("Category") && (
+            <div className="mt-3 space-y-2">
+              {categoryFilters.map((filter) => (
+                <label key={filter.slug} className="flex cursor-pointer items-center gap-2 text-xs text-gray-600">
+                  <input type="checkbox" checked={selectedCategories.includes(filter.slug)} onChange={() => toggleCategory(filter.slug)} />
+                  {filter.label}
+                </label>
+              ))}
+            </div>
+          )}
+        </section>
+
+        <section className="border-t border-gray-100 py-3">
+          <button type="button" onClick={() => toggleFilter("Price")} className="flex w-full items-center justify-between text-xs font-semibold uppercase text-gray-700">
+            Price <i className={`fas fa-chevron-${openFilters.includes("Price") ? "up" : "down"} text-[10px]`} aria-hidden="true" />
+          </button>
+          {openFilters.includes("Price") && (
+            <div className="mt-3">
+              <div className="grid grid-cols-[1fr_auto_1fr] items-end gap-2">
+                <label className="text-[10px] text-gray-500">MIN
+                  <input type="number" min="0" value={minimumPrice} onChange={(event) => setMinimumPrice(event.target.value)} className="mt-1 w-full rounded border border-gray-200 px-2 py-1.5 text-xs text-gray-800" />
+                </label>
+                <span className="pb-2 text-[10px] text-gray-400">TO</span>
+                <label className="text-[10px] text-gray-500">MAX
+                  <input type="number" min="0" value={maximumPrice} onChange={(event) => setMaximumPrice(event.target.value)} className="mt-1 w-full rounded border border-gray-200 px-2 py-1.5 text-xs text-gray-800" />
+                </label>
+              </div>
+              <input
+                type="range"
+                min="2.99"
+                max="605.99"
+                value={Math.min(Number(maximumPrice) || 605.99, 605.99)}
+                onChange={(event) => setMaximumPrice(event.target.value)}
+                aria-label="Maximum price"
+                className="mt-4 w-full accent-purple-800"
+              />
+              <div className="mt-1 flex justify-between text-[10px] text-gray-400"><span>$2</span><span>$2,804</span><span>$5,606</span></div>
+            </div>
+          )}
+        </section>
+
+        {collapsibleFilters.map(({ title, options }) => (
+          <section key={title} className="border-t border-gray-100 py-3">
+            <button type="button" onClick={() => toggleFilter(title)} className="flex w-full items-center justify-between text-xs font-semibold uppercase text-gray-700">
+              {title} <i className={`fas fa-chevron-${openFilters.includes(title) ? "up" : "down"} text-[10px]`} aria-hidden="true" />
+            </button>
+            {openFilters.includes(title) && (
+              <div className="mt-3 space-y-2">
+                {options.map((option) => (
+                  <label key={option} className="flex items-center gap-2 text-xs text-gray-600">
+                    <input type="checkbox" />
+                    {option}
+                  </label>
+                ))}
+              </div>
+            )}
+          </section>
+        ))}
+      </>
+    );
+  }
+
   if (category && !selectedCategoryName) {
     return (
       <main className="min-h-72 flex-1 bg-gray-50 px-6 py-12">
@@ -88,14 +159,14 @@ export default function WineListingClient({ category }: { category?: string }) {
   }
 
   return (
-    <main className="min-h-[26rem] flex-1 bg-gray-50 px-5 py-8 sm:px-8">
+    <main className="min-h-[26rem] flex-1 bg-gray-50 px-4 py-4 sm:px-8 sm:py-8">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Shop All Wines</h1>
-            <p className="mt-2 text-sm text-gray-500">{filteredProducts.length} products</p>
+            <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">Shop All Wines</h1>
+            <p className="mt-2 hidden text-sm text-gray-500 lg:block">{filteredProducts.length} products</p>
           </div>
-          <label className="flex items-center gap-2 text-sm text-gray-600">
+          <label className="hidden items-center gap-2 text-sm text-gray-600 lg:flex">
             <span className="sr-only">Sort products</span>
             <select
               value={sortOrder}
@@ -108,6 +179,30 @@ export default function WineListingClient({ category }: { category?: string }) {
             </select>
           </label>
         </div>
+        <div className="mt-4 flex items-center justify-between lg:hidden">
+          <button
+            type="button"
+            onClick={() => setMobileFiltersOpen(true)}
+            className="flex items-center gap-2 rounded-md border border-gray-200 bg-white px-3 py-2 text-xs text-gray-700"
+            aria-haspopup="dialog"
+          >
+            <i className="fas fa-sliders-h text-[10px]" aria-hidden="true" />
+            Filters
+          </button>
+          <span className="text-xs text-gray-700"><strong>{filteredProducts.length}</strong> products</span>
+        </div>
+        <label className="mt-3 block lg:hidden">
+          <span className="sr-only">Sort products</span>
+          <select
+            value={sortOrder}
+            onChange={(event) => setSortOrder(event.target.value)}
+            className="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-xs text-gray-700 outline-none focus:border-purple-700"
+          >
+            <option>Newest</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+          </select>
+        </label>
 
         {category && (
           <div className="mt-5 flex flex-wrap items-center gap-2 text-xs">
@@ -124,75 +219,37 @@ export default function WineListingClient({ category }: { category?: string }) {
         </div>
 
         <div className="mt-6 grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
-          <aside className="h-fit rounded-lg border border-gray-200 bg-white p-4">
+          <aside className="hidden h-fit rounded-lg border border-gray-200 bg-white p-4 lg:block">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="text-sm font-bold text-gray-900">Filters</h2>
               <button type="button" onClick={clearFilters} className="text-xs text-gray-500 hover:text-gray-900">Clear all</button>
             </div>
-
-            <section className="border-t border-gray-100 py-3">
-              <button type="button" onClick={() => toggleFilter("Category")} className="flex w-full items-center justify-between text-xs font-semibold uppercase text-gray-700">
-                Category <i className={`fas fa-chevron-${openFilters.includes("Category") ? "up" : "down"} text-[10px]`} aria-hidden="true" />
-              </button>
-              {openFilters.includes("Category") && (
-                <div className="mt-3 space-y-2">
-                  {categoryFilters.map((filter) => (
-                    <label key={filter.slug} className="flex cursor-pointer items-center gap-2 text-xs text-gray-600">
-                      <input type="checkbox" checked={selectedCategories.includes(filter.slug)} onChange={() => toggleCategory(filter.slug)} />
-                      {filter.label}
-                    </label>
-                  ))}
-                </div>
-              )}
-            </section>
-
-            <section className="border-t border-gray-100 py-3">
-              <button type="button" onClick={() => toggleFilter("Price")} className="flex w-full items-center justify-between text-xs font-semibold uppercase text-gray-700">
-                Price <i className={`fas fa-chevron-${openFilters.includes("Price") ? "up" : "down"} text-[10px]`} aria-hidden="true" />
-              </button>
-              {openFilters.includes("Price") && (
-                <div className="mt-3">
-                  <div className="grid grid-cols-[1fr_auto_1fr] items-end gap-2">
-                    <label className="text-[10px] text-gray-500">MIN
-                      <input type="number" min="0" value={minimumPrice} onChange={(event) => setMinimumPrice(event.target.value)} className="mt-1 w-full rounded border border-gray-200 px-2 py-1.5 text-xs text-gray-800" />
-                    </label>
-                    <span className="pb-2 text-[10px] text-gray-400">TO</span>
-                    <label className="text-[10px] text-gray-500">MAX
-                      <input type="number" min="0" value={maximumPrice} onChange={(event) => setMaximumPrice(event.target.value)} className="mt-1 w-full rounded border border-gray-200 px-2 py-1.5 text-xs text-gray-800" />
-                    </label>
-                  </div>
-                  <input
-                    type="range"
-                    min="2.99"
-                    max="605.99"
-                    value={Math.min(Number(maximumPrice) || 605.99, 605.99)}
-                    onChange={(event) => setMaximumPrice(event.target.value)}
-                    aria-label="Maximum price"
-                    className="mt-4 w-full accent-purple-800"
-                  />
-                  <div className="mt-1 flex justify-between text-[10px] text-gray-400"><span>$2</span><span>$2,804</span><span>$5,606</span></div>
-                </div>
-              )}
-            </section>
-
-            {collapsibleFilters.map(({ title, options }) => (
-              <section key={title} className="border-t border-gray-100 py-3">
-                <button type="button" onClick={() => toggleFilter(title)} className="flex w-full items-center justify-between text-xs font-semibold uppercase text-gray-700">
-                  {title} <i className={`fas fa-chevron-${openFilters.includes(title) ? "up" : "down"} text-[10px]`} aria-hidden="true" />
-                </button>
-                {openFilters.includes(title) && (
-                  <div className="mt-3 space-y-2">
-                    {options.map((option) => (
-                      <label key={option} className="flex items-center gap-2 text-xs text-gray-600">
-                        <input type="checkbox" />
-                        {option}
-                      </label>
-                    ))}
-                  </div>
-                )}
-              </section>
-            ))}
+            {renderFilterOptions()}
           </aside>
+          {mobileFiltersOpen && (
+            <div className="fixed inset-0 z-50 lg:hidden">
+              <button
+                type="button"
+                className="absolute inset-0 bg-black/35 backdrop-blur-[2px]"
+                aria-label="Close filters"
+                onClick={() => setMobileFiltersOpen(false)}
+              />
+              <aside
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="mobile-filters-title"
+                className="absolute inset-y-0 left-0 w-[72vw] max-w-sm overflow-y-auto bg-white px-4 pb-8 pt-3 shadow-xl"
+              >
+                <div className="mb-4 flex items-center justify-between">
+                  <h2 id="mobile-filters-title" className="text-sm font-semibold text-gray-900">Filters</h2>
+                  <button type="button" aria-label="Close filters" onClick={() => setMobileFiltersOpen(false)} className="p-1 text-sm text-gray-700">
+                    <i className="fas fa-times" aria-hidden="true" />
+                  </button>
+                </div>
+                {renderFilterOptions()}
+              </aside>
+            </div>
+          )}
 
           <section aria-live="polite">
             {filteredProducts.length === 0 ? (
@@ -204,7 +261,7 @@ export default function WineListingClient({ category }: { category?: string }) {
                 <p className="mt-1 text-xs text-gray-500">Try adjusting your filters or search criteria.</p>
               </div>
             ) : (
-              <ProductSection title={category ? `${selectedCategoryName} Wines` : "All Wines"} products={filteredProducts} />
+              <ProductSection title={category ? `${selectedCategoryName} Wines` : "All Wines"} products={filteredProducts} mobileCarousel={false} showHeading={false} />
             )}
           </section>
         </div>
