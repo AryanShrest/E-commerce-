@@ -2,13 +2,22 @@
 import { useRef } from "react";
 import Link from "next/link";
 import type { Product } from "@/lib/products";
+import AddToCartButton from "./AddToCartButton";
+import FavoriteButton from "./FavoriteButton";
 
 function ProductCard({ product }: { product: Product }) {
   return (
     <div className="flex flex-col bg-white border border-gray-200 rounded-xl overflow-hidden h-full" style={{ minWidth: 0 }}>
-      <Link href={`/product/${product.slug}`} className="flex items-center justify-center p-4" style={{ height: "200px" }}>
-        <img src={product.img} alt={product.title} className="h-full object-contain" />
-      </Link>
+      <div className="relative">
+        <Link href={`/product/${product.slug}`} className="flex items-center justify-center p-4" style={{ height: "200px" }}>
+          <img src={product.img} alt={product.title} className="h-full object-contain" />
+        </Link>
+        <FavoriteButton
+          slug={product.slug}
+          title={product.title}
+          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 shadow-sm transition hover:border-purple-700 hover:text-purple-700"
+        />
+      </div>
       <div className="flex flex-col flex-1 p-4 gap-2">
         <Link href={`/product/${product.slug}`} className="text-sm font-semibold text-gray-800 leading-snug line-clamp-2 hover:text-purple-700 transition">
           {product.title}
@@ -24,12 +33,11 @@ function ProductCard({ product }: { product: Product }) {
           </div>
         )}
         <p className="text-base font-bold text-gray-900 mt-auto">{product.price}</p>
-        <button
-          className="w-full py-2 rounded-lg text-white text-sm font-semibold transition hover:opacity-90"
-          style={{ backgroundColor: "#4B1D7B" }}
-        >
-          Add to Cart
-        </button>
+        <AddToCartButton
+          slug={product.slug}
+          title={product.title}
+          className="w-full rounded-lg py-2 text-sm font-semibold text-white transition hover:opacity-90"
+        />
       </div>
     </div>
   );

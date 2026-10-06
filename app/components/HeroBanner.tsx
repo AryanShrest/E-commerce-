@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 
 const slides = [
@@ -50,12 +51,13 @@ export default function HeroBanner() {
           </h2>
           <div className="w-16 h-px bg-white/60 mb-3" />
           <p className="text-base md:text-lg mb-6 text-white/90">{sub}</p>
-          <button
+          <Link
+            href="/wines"
             className="text-white px-6 py-2.5 rounded-md text-sm font-semibold tracking-wide transition hover:opacity-90"
             style={{ backgroundColor: "#2E1054" }}
           >
             SHOP NOW
-          </button>
+          </Link>
         </div>
 
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">

@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { ToastProvider } from "./components/ToastProvider";
+import { CartProvider } from "./components/CartProvider";
+import { WishlistProvider } from "./components/WishlistProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,7 +22,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <CartProvider>
+          <WishlistProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </WishlistProvider>
+        </CartProvider>
+      </body>
     </html>
   );
 }

@@ -6,6 +6,8 @@ import ProductSection from "./components/ProductSection";
 import Footer from "./components/Footer";
 import { products } from "@/lib/products";
 
+const homeProducts = products.filter((product) => product.slug !== "opus-one-2019");
+
 export default function Home() {
   return (
     <>
@@ -14,8 +16,8 @@ export default function Home() {
       <main>
         <HeroBanner />
         <CategoryPills />
-        <ProductSection title="Trending Today" products={products} />
-        <ProductSection title="Popular Red Wines" products={products} />
+        <ProductSection title="Trending Today" products={homeProducts} />
+        <ProductSection title="Popular Red Wines" products={homeProducts} />
       </main>
       <Footer />
     </>

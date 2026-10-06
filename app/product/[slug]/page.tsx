@@ -136,7 +136,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
                 <p className="text-3xl font-bold text-gray-900">{product.price}</p>
 
-                <ProductDetailClient />
+                <ProductDetailClient product={product} />
 
                 <hr className="border-gray-200" />
 

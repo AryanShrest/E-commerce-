@@ -1,5 +1,6 @@
 export type Product = {
   slug: string;
+  category: "red-wine" | "rose-wine" | "white-wine";
   title: string;
   variant: string;
   rating?: { score: number; source: string };
@@ -16,6 +17,7 @@ const BOTTLE_IMG = "/Screenshot 2026-09-15 173034.png";
 export const products: Product[] = [
   {
     slug: "caiarossa-vertical-case-vv",
+    category: "red-wine",
     title: "Caiarossa - Vertical Case Caiarossa 15-16-17-18-19-20 - VV",
     variant: "Vertical Case Caiarossa 15-16-17-18-19-...",
     rating: { score: 97, source: "James Suckling" },
@@ -28,6 +30,7 @@ export const products: Product[] = [
   },
   {
     slug: "chateau-ducru-beaucaillou-gift-set",
+    category: "red-wine",
     title: "Chateau Ducru Beaucaillou - 95/96/99 Gift Set - VV",
     variant: "95/96/99 Gift Set",
     rating: { score: 95, source: "Decanter" },
@@ -40,6 +43,7 @@ export const products: Product[] = [
   },
   {
     slug: "chateau-belle-vue-le-chateau-2014",
+    category: "red-wine",
     title: "Chateau Belle-Vue - Le Chateau - 2014",
     variant: "Le Chateau",
     price: "$58.99",
@@ -51,6 +55,7 @@ export const products: Product[] = [
   },
   {
     slug: "chateau-belle-vue-le-chateau-2013",
+    category: "red-wine",
     title: "Chateau Belle-Vue - Le Chateau - 2013",
     variant: "Le Chateau",
     price: "$61.99",
@@ -62,6 +67,7 @@ export const products: Product[] = [
   },
   {
     slug: "opus-one-2019",
+    category: "red-wine",
     title: "Opus One - Napa Valley Red - 2019",
     variant: "Napa Valley Red Blend",
     price: "$399.99",

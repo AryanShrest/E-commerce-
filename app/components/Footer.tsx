@@ -1,4 +1,5 @@
-import WineLogo from "./WineLogo";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -6,17 +7,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Brand block */}
         <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-12 bg-white/10 flex items-center justify-center rounded">
-              <WineLogo />
-            </div>
-            <div>
-              <p className="font-bold text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>Zymowine.com</p>
-              <p className="text-xs text-white/60 italic" style={{ fontFamily: "'Playfair Display', serif" }}>
-                &ldquo;the science of fine wine&rdquo;
-              </p>
-            </div>
-          </div>
+          <Image
+            src="/corecraft-logo.png"
+            alt="CoreCraft Technologies"
+            width={324}
+            height={229}
+            className="h-28 w-40 rounded bg-white object-contain"
+          />
           <p className="text-sm text-white/70 leading-relaxed">
             Curating the finest wines from around the world. Discover authentic flavors and elevate your everyday moments.
           </p>
@@ -35,7 +32,8 @@ export default function Footer() {
           <p className="font-semibold mb-4 text-white/90">Useful Pages</p>
           <ul className="space-y-2 text-sm text-white/70">
             <li><a href="#" className="hover:text-white transition">Contact Us</a></li>
-            <li><a href="#" className="hover:text-white transition">View Cart</a></li>
+            <li><Link href="/cart" className="hover:text-white transition">View Cart</Link></li>
+            <li><Link href="/wishlist" className="hover:text-white transition">View Wishlist</Link></li>
           </ul>
         </div>
 
