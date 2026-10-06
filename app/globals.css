@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-purple-dark: #2E1054;
+  --color-purple: #4B1D7B;
+  --color-purple-light: #7E3DB5;
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #ffffff;
+}
+
+.product-scroll {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.product-scroll::-webkit-scrollbar {
+  display: none;
+}
