@@ -38,7 +38,7 @@ export default function HeroBanner() {
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-3 sm:px-6 sm:py-6">
-      <div className="group relative aspect-[1600/490] overflow-hidden rounded-xl bg-pink-50 sm:rounded-2xl">
+      <div className="group relative aspect-[12/5] overflow-hidden rounded-xl bg-pink-50 sm:aspect-[1600/450] sm:rounded-2xl">
         <Link href={href} aria-label="Shop the promotion" className="absolute inset-0 z-0 block">
           <img src={img} alt={alt} className="h-full w-full object-cover object-center" />
         </Link>

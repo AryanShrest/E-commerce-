@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCart } from "./CartProvider";
 
 const navItems = [
@@ -13,7 +14,17 @@ const navItems = [
 
 export default function MobileBottomNav() {
   const { items } = useCart();
+  const pathname = usePathname();
   const cartCount = items.reduce((total, item) => total + item.quantity, 0);
+
+  function isActive(href: string) {
+    const path = href.split("?")[0];
+    if (path === "/") return pathname === "/";
+    if (path === "/shop") {
+      return pathname === "/shop" || pathname.startsWith("/shop/") || pathname.startsWith("/product/");
+    }
+    return pathname === path || pathname.startsWith(`${path}/`);
+  }
 
   return (
     <nav aria-label="Mobile navigation" className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-gray-200 bg-white sm:hidden">
@@ -21,7 +32,8 @@ export default function MobileBottomNav() {
         <Link
           key={label}
           href={href}
-          className={`relative flex min-h-[3.75rem] flex-col items-center justify-center gap-1 text-[10px] ${label === "Home" ? "bg-[#E45D89] text-white" : "text-gray-500"}`}
+          aria-current={isActive(href) ? "page" : undefined}
+          className={`relative flex min-h-[3.75rem] flex-col items-center justify-center gap-1 text-[10px] ${isActive(href) ? "bg-[#E45D89] text-white" : "text-gray-500"}`}
         >
           <span className="relative">
             <i className={`fas ${icon} text-sm`} aria-hidden="true" />
