@@ -47,7 +47,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
             </div>
 
-            <section className="order-2 min-w-0 rounded-xl border border-gray-200 bg-white p-3 sm:rounded-2xl sm:p-6 lg:col-start-2 lg:row-span-3 lg:row-start-1" style={{ position: "sticky", top: "24px", alignSelf: "flex-start" }}>
+            <section className="order-2 min-w-0 rounded-xl border border-gray-200 bg-white p-3 sm:rounded-2xl sm:p-6 lg:col-start-2 lg:row-span-3 lg:row-start-1">
               <p className="text-[10px] font-semibold uppercase tracking-wide text-pink-700 sm:text-xs">
                 {product.brand}
               </p>
