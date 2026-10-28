@@ -3,18 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { products } from "@/lib/products";
+import { formatPrice, products } from "@/lib/products";
 import { useCart } from "./CartProvider";
 
-const purple = "#4B1D7B";
-
-function priceOf(price: string) {
-  return Number(price.replace(/[^0-9.]/g, ""));
-}
-
-function formatPrice(amount: number) {
-  return `$${amount.toFixed(2)}`;
-}
+const brandColor = "#E45D89";
 
 export default function CartPageClient() {
   const { items, isLoaded, updateQuantity, removeItem, clearCart } = useCart();
@@ -23,7 +15,7 @@ export default function CartPageClient() {
     return product ? [{ ...item, product }] : [];
   });
   const subtotal = cartItems.reduce(
-    (total, item) => total + priceOf(item.product.price) * item.quantity,
+    (total, item) => total + item.product.price * item.quantity,
     0,
   );
   const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -55,11 +47,11 @@ export default function CartPageClient() {
         {cartItems.length === 0 ? (
           <div className="rounded-xl border border-gray-200 bg-white px-6 py-12 text-center shadow-sm">
             <p className="text-lg font-semibold text-gray-900">Your cart is empty</p>
-            <p className="mt-2 text-sm text-gray-500">Add a wine and it will appear here.</p>
+            <p className="mt-2 text-sm text-gray-500">Add a product and it will appear here.</p>
             <Link
-              href="/"
+              href="/shop"
               className="mt-6 inline-flex rounded-lg px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90"
-              style={{ backgroundColor: purple }}
+              style={{ backgroundColor: brandColor }}
             >
               Continue shopping
             </Link>
@@ -88,18 +80,18 @@ export default function CartPageClient() {
                     <div className="min-w-0">
                       <Link
                         href={`/product/${product.slug}`}
-                        className="line-clamp-2 text-sm font-semibold text-gray-900 hover:text-purple-700"
+                        className="line-clamp-2 text-sm font-semibold text-gray-900 hover:text-pink-700"
                       >
                         {product.title}
                       </Link>
-                      <p className="mt-1 text-sm text-gray-500">{product.price} each</p>
+                      <p className="mt-1 text-sm text-gray-500">{formatPrice(product.price)} each</p>
                       <div className="mt-3 flex items-center gap-3 sm:hidden">
                         <QuantityControl
                           quantity={quantity}
                           onChange={(nextQuantity) => updateQuantity(product.slug, nextQuantity)}
                         />
                         <span className="text-sm font-semibold text-gray-900">
-                          {formatPrice(priceOf(product.price) * quantity)}
+                          {formatPrice(product.price * quantity)}
                         </span>
                       </div>
                     </div>
@@ -110,7 +102,7 @@ export default function CartPageClient() {
                     />
                     <div className="hidden items-center gap-3 sm:flex">
                       <span className="min-w-16 text-right text-sm font-semibold text-gray-900">
-                        {formatPrice(priceOf(product.price) * quantity)}
+                        {formatPrice(product.price * quantity)}
                       </span>
                       <button
                         type="button"
@@ -151,7 +143,7 @@ export default function CartPageClient() {
               <Link
                 href="/checkout"
                 className="mt-6 block w-full rounded-lg px-4 py-3 text-center text-sm font-semibold text-white transition hover:opacity-90"
-                style={{ backgroundColor: purple }}
+                style={{ backgroundColor: brandColor }}
               >
                 Proceed to Checkout
               </Link>
@@ -182,7 +174,7 @@ function QuantityControl({
   }
 
   return (
-    <div className={`flex items-center overflow-hidden rounded-md text-white ${className}`} style={{ backgroundColor: purple }}>
+    <div className={`flex items-center overflow-hidden rounded-md text-white ${className}`} style={{ backgroundColor: brandColor }}>
       <button
         type="button"
         onClick={() => {

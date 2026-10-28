@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import AccountPageClient from "@/app/components/AccountPageClient";
-import AnnouncementBar from "@/app/components/AnnouncementBar";
 import Footer from "@/app/components/Footer";
 import Header from "@/app/components/Header";
 
@@ -18,7 +17,6 @@ export default async function AccountPage({
 
   return (
     <>
-      <AnnouncementBar />
       <Header />
       <AccountPageClient initialMode={initialMode} />
       <Footer />

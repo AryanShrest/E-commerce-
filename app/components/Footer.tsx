@@ -3,56 +3,72 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: "#2E1054" }} className="hidden text-white sm:block">
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
-        {/* Brand block */}
-        <div className="flex flex-col gap-4">
-          <Image
-            src="/corecraft-logo.png"
-            alt="CoreCraft Technologies"
-            width={324}
-            height={229}
-            className="h-28 w-40 rounded bg-white object-contain"
-          />
-          <p className="text-sm text-white/70 leading-relaxed">
-            Curating the finest wines from around the world. Discover authentic flavors and elevate your everyday moments.
-          </p>
-          <div className="flex gap-4 text-white/60">
-            <a href="#" className="hover:text-white transition"><i className="fab fa-facebook-f" /></a>
-            <a href="#" className="hover:text-white transition"><i className="fab fa-instagram" /></a>
-            <a href="#" className="hover:text-white transition"><i className="fab fa-twitter" /></a>
-          </div>
-          <a href="mailto:service@zymowine.com" className="text-sm text-white/70 hover:text-white transition">
-            service@zymowine.com
-          </a>
+    <footer style={{ backgroundColor: "#F9FAFB" }} className="hidden text-gray-900 sm:block">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-12 md:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
+        <div>
+          <Link href="/" aria-label="Beauticuty home" className="inline-flex items-center gap-3">
+            <Image
+              src="/zymowine-logo.png"
+              alt="Beauticuty"
+              width={551}
+              height={551}
+              className="h-20 w-20 object-contain"
+              style={{ mixBlendMode: "multiply" }}
+            />
+            <span
+              className="font-serif text-2xl font-medium leading-none tracking-[0.06em] text-gray-900"
+              style={{ fontVariantCaps: "small-caps" }}
+            >
+              Beauticuty
+            </span>
+          </Link>
+          <p className="mt-5 text-sm text-gray-700">© 2026 Beauticuty. All rights reserved.</p>
+          <p className="mt-2 text-sm text-gray-600">Powered by CoreCraft Technologies</p>
         </div>
 
-        {/* Useful Pages col 1 */}
         <div>
-          <p className="font-semibold mb-4 text-white/90">Useful Pages</p>
-          <ul className="space-y-2 text-sm text-white/70">
-            <li><a href="#" className="hover:text-white transition">Contact Us</a></li>
-            <li><Link href="/cart" className="hover:text-white transition">View Cart</Link></li>
-            <li><Link href="/wishlist" className="hover:text-white transition">View Wishlist</Link></li>
+          <p className="mb-4 text-sm font-semibold text-gray-900">Quick Links</p>
+          <ul className="space-y-3 text-sm text-gray-600">
+            <li>
+              <Link href="/shop" className="transition hover:text-gray-900">All Products</Link>
+            </li>
+            <li>
+              <Link href="/shop/makeup" className="transition hover:text-gray-900">Make Up</Link>
+            </li>
+            <li>
+              <Link href="/shop/skin-care" className="transition hover:text-gray-900">Skin Care</Link>
+            </li>
+            <li>
+              <Link href="/shop/hair-care" className="transition hover:text-gray-900">Hair Care</Link>
+            </li>
+            <li>
+              <Link href="/gift-card" className="transition hover:text-gray-900">Gift Card</Link>
+            </li>
           </ul>
         </div>
 
-        {/* Useful Pages col 2 */}
         <div>
-          <p className="font-semibold mb-4 text-white/90">Useful Pages</p>
-          <ul className="space-y-2 text-sm text-white/70">
-            <li><a href="#" className="hover:text-white transition">Shipping &amp; Returns</a></li>
-            <li><a href="#" className="hover:text-white transition">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-white transition">Terms of Service</a></li>
+          <p className="mb-4 text-sm font-semibold text-gray-900">Social</p>
+          <ul className="space-y-3 text-sm text-gray-600">
+            <li>
+              <a href="#" className="transition hover:text-gray-900">Facebook</a>
+            </li>
+            <li>
+              <a href="#" className="transition hover:text-gray-900">Instagram</a>
+            </li>
           </ul>
         </div>
-      </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/50">
-          <span>© 2026 Zymo Wine. All rights reserved.</span>
-          <span>Must be 21 years or older to purchase alcohol.</span>
+        <div>
+          <p className="mb-4 text-sm font-semibold text-gray-900">Contact</p>
+          <ul className="space-y-3 text-sm text-gray-600">
+            <li>Durbar Marg, Kathmandu</li>
+            <li>
+              <a href="mailto:service@zymowine.com" className="transition hover:text-gray-900">
+                service@zymowine.com
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

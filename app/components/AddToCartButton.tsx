@@ -26,7 +26,7 @@ export default function AddToCartButton({
       type="button"
       onClick={handleAddToCart}
       className={className}
-      style={{ backgroundColor: "#4B1D7B" }}
+      style={{ backgroundColor: "#E45D89" }}
     >
       Add to Cart
     </button>

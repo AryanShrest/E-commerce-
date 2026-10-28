@@ -3,12 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { products } from "@/lib/products";
+import { formatPrice, products } from "@/lib/products";
 import { useCart } from "./CartProvider";
 import { useToast } from "./ToastProvider";
 import { useWishlist } from "./WishlistProvider";
 
-const purple = "#4B1D7B";
+const brandColor = "#E45D89";
 
 export default function WishlistPageClient() {
   const { slugs, isLoaded, removeFromWishlist, clearWishlist } = useWishlist();
@@ -81,13 +81,13 @@ export default function WishlistPageClient() {
           <section className="rounded-xl border border-gray-200 bg-white px-6 py-12 text-center shadow-sm">
             <i className="far fa-heart text-3xl text-gray-400" aria-hidden="true" />
             <p className="mt-3 text-lg font-semibold text-gray-900">Your wishlist is empty</p>
-            <p className="mt-2 text-sm text-gray-500">Tap a heart on a wine to save it here.</p>
+            <p className="mt-2 text-sm text-gray-500">Tap a heart on a product to save it here.</p>
             <Link
-              href="/"
+              href="/shop"
               className="mt-6 inline-flex rounded-lg px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90"
-              style={{ backgroundColor: purple }}
+              style={{ backgroundColor: brandColor }}
             >
-              Browse wines
+              Browse products
             </Link>
           </section>
         ) : (
@@ -111,16 +111,16 @@ export default function WishlistPageClient() {
                     <Image src={product.img} alt={product.title} width={180} height={180} className="h-full object-contain" />
                   </Link>
                   <div className="flex flex-1 flex-col gap-2 p-4">
-                    <Link href={`/product/${product.slug}`} className="line-clamp-2 text-sm font-semibold leading-snug text-gray-800 hover:text-purple-700">
+                    <Link href={`/product/${product.slug}`} className="line-clamp-2 text-sm font-semibold leading-snug text-gray-800 hover:text-pink-700">
                       {product.title}
                     </Link>
-                    <p className="mt-auto text-base font-bold text-gray-900">{product.price}</p>
+                    <p className="mt-auto text-base font-bold text-gray-900">{formatPrice(product.price)}</p>
                     <div className="grid grid-cols-[1fr_auto] gap-2">
                       <button
                         type="button"
                         onClick={() => moveToCart(product.slug, product.title)}
                         className="rounded-lg px-3 py-2 text-sm font-semibold text-white transition hover:opacity-90"
-                        style={{ backgroundColor: purple }}
+                        style={{ backgroundColor: brandColor }}
                       >
                         <i className="fas fa-shopping-cart mr-2" aria-hidden="true" />
                         Move to cart

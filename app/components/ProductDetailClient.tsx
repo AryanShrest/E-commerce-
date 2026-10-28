@@ -55,7 +55,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
       <FavoriteButton
         slug={product.slug}
         title={product.title}
-        className="flex h-8 w-8 items-center justify-center rounded-md border border-gray-300 text-xs text-gray-500 transition hover:border-purple-700 hover:text-purple-700 sm:h-10 sm:w-10 sm:rounded-lg sm:text-base"
+        className="flex h-8 w-8 items-center justify-center rounded-md border border-gray-300 text-xs text-gray-500 transition hover:border-pink-700 hover:text-pink-700 sm:h-10 sm:w-10 sm:rounded-lg sm:text-base"
       />
     </div>
   );

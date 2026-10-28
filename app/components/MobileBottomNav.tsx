@@ -5,7 +5,7 @@ import { useCart } from "./CartProvider";
 
 const navItems = [
   { label: "Home", href: "/", icon: "fa-home" },
-  { label: "Search", href: "/wines", icon: "fa-search" },
+  { label: "Shop", href: "/shop", icon: "fa-store" },
   { label: "Cart", href: "/cart", icon: "fa-shopping-cart" },
   { label: "Wishlist", href: "/wishlist", icon: "fa-heart" },
   { label: "Sign Up", href: "/account?mode=login", icon: "fa-user" },
@@ -21,7 +21,7 @@ export default function MobileBottomNav() {
         <Link
           key={label}
           href={href}
-          className={`relative flex min-h-[3.75rem] flex-col items-center justify-center gap-1 text-[10px] ${label === "Home" ? "bg-[#4B1D7B] text-white" : "text-gray-500"}`}
+          className={`relative flex min-h-[3.75rem] flex-col items-center justify-center gap-1 text-[10px] ${label === "Home" ? "bg-[#E45D89] text-white" : "text-gray-500"}`}
         >
           <span className="relative">
             <i className={`fas ${icon} text-sm`} aria-hidden="true" />

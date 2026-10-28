@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
-const purple = "#4B1D7B";
+const brandColor = "#E45D89";
 const loginInputClass =
-  "mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-700 focus:ring-2 focus:ring-purple-100 sm:mt-1.5 sm:py-3 sm:text-sm";
+  "mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-pink-700 focus:ring-2 focus:ring-pink-100 sm:mt-1.5 sm:py-3 sm:text-sm";
 const loginLabelClass = "block text-xs font-semibold text-gray-700 sm:text-sm";
 const signupInputClass =
-  "mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-700 focus:ring-2 focus:ring-purple-100 sm:mt-1.5 sm:py-3 sm:text-sm";
+  "mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-pink-700 focus:ring-2 focus:ring-pink-100 sm:mt-1.5 sm:py-3 sm:text-sm";
 const signupLabelClass = "block text-xs font-semibold text-gray-700 sm:text-sm";
 
 export default function AccountPageClient({ initialMode }: { initialMode: "login" | "signup" }) {
@@ -45,11 +45,11 @@ export default function AccountPageClient({ initialMode }: { initialMode: "login
           </div>
 
           <div className="mb-7 flex items-center gap-2 text-xs font-semibold">
-            <span className="rounded-full bg-purple-100 px-4 py-2 text-purple-900">
+            <span className="rounded-full bg-pink-100 px-4 py-2 text-pink-900">
               <i className="fas fa-check mr-1" aria-hidden="true" />
               Step 1
             </span>
-            <span className="rounded-full px-4 py-2 text-white" style={{ backgroundColor: purple }}>Step 2</span>
+            <span className="rounded-full px-4 py-2 text-white" style={{ backgroundColor: brandColor }}>Step 2</span>
           </div>
 
           <div aria-label="Six-digit verification code" className="flex justify-center gap-2 sm:gap-3">
@@ -68,7 +68,7 @@ export default function AccountPageClient({ initialMode }: { initialMode: "login
 
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-500">Code expires in <span className="font-semibold text-gray-700">2:53</span></p>
-            <button type="button" disabled className="mt-2 text-sm font-medium text-purple-400 opacity-70">
+            <button type="button" disabled className="mt-2 text-sm font-medium text-pink-400 opacity-70">
               <i className="fas fa-redo-alt mr-2" aria-hidden="true" />
               Resend code
             </button>
@@ -78,7 +78,7 @@ export default function AccountPageClient({ initialMode }: { initialMode: "login
             type="button"
             disabled
             className="mt-8 w-full cursor-not-allowed rounded-lg px-4 py-3 text-sm font-semibold text-white opacity-50"
-            style={{ backgroundColor: purple }}
+            style={{ backgroundColor: brandColor }}
           >
             Verify Email
           </button>
@@ -86,7 +86,7 @@ export default function AccountPageClient({ initialMode }: { initialMode: "login
           <button
             type="button"
             onClick={() => setSignupStep(1)}
-            className="mt-8 flex w-full items-center justify-center gap-3 text-sm font-medium text-gray-600 hover:text-purple-700"
+            className="mt-8 flex w-full items-center justify-center gap-3 text-sm font-medium text-gray-600 hover:text-pink-700"
           >
             <i className="fas fa-arrow-left" aria-hidden="true" />
             Back to registration
@@ -101,7 +101,7 @@ export default function AccountPageClient({ initialMode }: { initialMode: "login
                 setSignupStep(1);
                 setNotice("");
               }}
-              className="font-semibold text-purple-800 hover:underline"
+              className="font-semibold text-pink-800 hover:underline"
             >
               Sign in
             </button>
@@ -125,7 +125,7 @@ export default function AccountPageClient({ initialMode }: { initialMode: "login
 
         {mode === "signup" && (
           <div className="mb-4 flex items-center gap-2 text-[10px] font-semibold sm:mb-7 sm:text-xs">
-            <span className="rounded-full px-3 py-1.5 text-white sm:px-4 sm:py-2" style={{ backgroundColor: purple }}>Step 1</span>
+            <span className="rounded-full px-3 py-1.5 text-white sm:px-4 sm:py-2" style={{ backgroundColor: brandColor }}>Step 1</span>
             <span className="rounded-full bg-gray-100 px-3 py-1.5 text-gray-400 sm:px-4 sm:py-2">Step 2</span>
           </div>
         )}
@@ -201,7 +201,7 @@ export default function AccountPageClient({ initialMode }: { initialMode: "login
               <button
                 type="button"
                 onClick={() => setNotice("Password reset is not available until account services are connected.")}
-                className="font-medium text-purple-800 hover:underline"
+                className="font-medium text-pink-800 hover:underline"
               >
                 Forgot password?
               </button>
@@ -210,7 +210,7 @@ export default function AccountPageClient({ initialMode }: { initialMode: "login
 
           {notice && <p role="status" className="mt-4 rounded-md bg-amber-50 p-3 text-sm text-amber-900">{notice}</p>}
 
-          <button type="submit" className={`w-full rounded-lg px-4 font-semibold text-white shadow-md transition hover:opacity-90 ${mode === "login" || mode === "signup" ? "mt-3 py-2 text-xs sm:mt-5 sm:py-3 sm:text-sm" : "mt-5 py-3 text-sm"}`} style={{ backgroundColor: purple }}>
+          <button type="submit" className={`w-full rounded-lg px-4 font-semibold text-white shadow-md transition hover:opacity-90 ${mode === "login" || mode === "signup" ? "mt-3 py-2 text-xs sm:mt-5 sm:py-3 sm:text-sm" : "mt-5 py-3 text-sm"}`} style={{ backgroundColor: brandColor }}>
             {mode === "login" ? "Sign In" : "Continue"}
           </button>
         </form>
@@ -224,12 +224,12 @@ export default function AccountPageClient({ initialMode }: { initialMode: "login
               setSignupStep(1);
               setNotice("");
             }}
-            className="font-semibold text-purple-800 hover:underline"
+            className="font-semibold text-pink-800 hover:underline"
           >
             {mode === "login" ? "Register here" : "Sign in"}
           </button>
         </p>
-        <Link href="/" className="mt-5 hidden text-center text-sm text-gray-500 hover:text-purple-700 sm:block">
+        <Link href="/" className="mt-5 hidden text-center text-sm text-gray-500 hover:text-pink-700 sm:block">
           Continue shopping
         </Link>
       </section>

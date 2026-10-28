@@ -3,11 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { products } from "@/lib/products";
+import { formatPrice, products } from "@/lib/products";
 import { useCart } from "./CartProvider";
 
-const purple = "#4B1D7B";
-const shippingCost = 25;
+const brandColor = "#E45D89";
+const shippingCost = 200;
 const states = [
   "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
   "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
@@ -18,16 +18,12 @@ const states = [
   "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming",
 ];
 
-function priceOf(price: string) {
-  return Number(price.replace(/[^0-9.]/g, ""));
-}
-
-function formatPrice(amount: number) {
-  return `$${amount.toFixed(2)}`;
+function priceNumber(price: number) {
+  return price;
 }
 
 const inputClass =
-  "mt-1.5 w-full rounded-md border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-700 focus:ring-2 focus:ring-purple-100";
+  "mt-1.5 w-full rounded-md border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-pink-700 focus:ring-2 focus:ring-pink-100";
 const labelClass = "block text-xs font-semibold text-gray-700";
 
 export default function CheckoutPageClient() {
@@ -43,7 +39,7 @@ export default function CheckoutPageClient() {
     return product ? [{ ...item, product }] : [];
   });
   const subtotal = cartItems.reduce(
-    (total, item) => total + priceOf(item.product.price) * item.quantity,
+    (total, item) => total + priceNumber(item.product.price) * item.quantity,
     0,
   );
   const total = subtotal + shippingCost;
@@ -85,8 +81,8 @@ export default function CheckoutPageClient() {
       <main className="min-h-72 flex-1 bg-gray-50 px-6 py-12">
         <div className="mx-auto max-w-3xl rounded-xl border border-gray-200 bg-white p-8 text-center shadow-sm">
           <h1 className="text-xl font-bold text-gray-900">Your cart is empty</h1>
-          <p className="mt-2 text-sm text-gray-500">Add a wine before continuing to checkout.</p>
-          <Link href="/" className="mt-5 inline-flex rounded-lg px-5 py-3 text-sm font-semibold text-white" style={{ backgroundColor: purple }}>
+          <p className="mt-2 text-sm text-gray-500">Add a product before continuing to checkout.</p>
+          <Link href="/" className="mt-5 inline-flex rounded-lg px-5 py-3 text-sm font-semibold text-white" style={{ backgroundColor: brandColor }}>
             Continue shopping
           </Link>
         </div>
@@ -104,7 +100,7 @@ export default function CheckoutPageClient() {
               setContactMode("guest");
               setNotice("");
             }}
-            className="mb-5 text-sm font-medium text-gray-600 transition hover:text-purple-700"
+            className="mb-5 text-sm font-medium text-gray-600 transition hover:text-pink-700"
           >
             <i className="fas fa-arrow-left mr-2" aria-hidden="true" />
             Back to checkout
@@ -117,7 +113,7 @@ export default function CheckoutPageClient() {
               </div>
 
               <div className="mb-6 flex items-center gap-2 text-xs font-semibold">
-                <span className="rounded-full px-4 py-2 text-white" style={{ backgroundColor: purple }}>Step 1</span>
+                <span className="rounded-full px-4 py-2 text-white" style={{ backgroundColor: brandColor }}>Step 1</span>
                 <span className="rounded-full bg-gray-100 px-4 py-2 text-gray-400">Step 2</span>
               </div>
 
@@ -159,7 +155,7 @@ export default function CheckoutPageClient() {
 
                 {notice && <p role="status" className="mt-4 rounded-md bg-amber-50 p-3 text-sm text-amber-900">{notice}</p>}
 
-                <button type="submit" className="mt-5 w-full rounded-lg px-4 py-3 text-sm font-semibold text-white shadow-md transition hover:opacity-90" style={{ backgroundColor: purple }}>
+                <button type="submit" className="mt-5 w-full rounded-lg px-4 py-3 text-sm font-semibold text-white shadow-md transition hover:opacity-90" style={{ backgroundColor: brandColor }}>
                   Continue
                 </button>
               </form>
@@ -172,7 +168,7 @@ export default function CheckoutPageClient() {
                     setAccountMode("login");
                     setNotice("");
                   }}
-                  className="font-semibold text-purple-800 hover:underline"
+                  className="font-semibold text-pink-800 hover:underline"
                 >
                   Sign in
                 </button>
@@ -188,11 +184,11 @@ export default function CheckoutPageClient() {
               </div>
 
               <div className="mb-7 flex items-center gap-2 text-xs font-semibold">
-                <span className="rounded-full bg-purple-100 px-4 py-2 text-purple-900">
+                <span className="rounded-full bg-pink-100 px-4 py-2 text-pink-900">
                   <i className="fas fa-check mr-1" aria-hidden="true" />
                   Step 1
                 </span>
-                <span className="rounded-full px-4 py-2 text-white" style={{ backgroundColor: purple }}>Step 2</span>
+                <span className="rounded-full px-4 py-2 text-white" style={{ backgroundColor: brandColor }}>Step 2</span>
               </div>
 
               <div aria-label="Six-digit verification code" className="flex justify-center gap-2 sm:gap-3">
@@ -211,7 +207,7 @@ export default function CheckoutPageClient() {
 
               <div className="mt-8 text-center">
                 <p className="text-sm text-gray-500">Code expires in <span className="font-semibold text-gray-700">2:53</span></p>
-                <button type="button" disabled className="mt-2 text-sm font-medium text-purple-400 opacity-70">
+                <button type="button" disabled className="mt-2 text-sm font-medium text-pink-400 opacity-70">
                   <i className="fas fa-redo-alt mr-2" aria-hidden="true" />
                   Resend code
                 </button>
@@ -221,7 +217,7 @@ export default function CheckoutPageClient() {
                 type="button"
                 disabled
                 className="mt-8 w-full cursor-not-allowed rounded-lg px-4 py-3 text-sm font-semibold text-white opacity-50"
-                style={{ backgroundColor: purple }}
+                style={{ backgroundColor: brandColor }}
               >
                 Verify Email
               </button>
@@ -232,7 +228,7 @@ export default function CheckoutPageClient() {
                   setSignupStep(1);
                   setNotice("");
                 }}
-                className="mt-8 flex w-full items-center justify-center gap-3 text-sm font-medium text-gray-600 hover:text-purple-700"
+                className="mt-8 flex w-full items-center justify-center gap-3 text-sm font-medium text-gray-600 hover:text-pink-700"
               >
                 <i className="fas fa-arrow-left" aria-hidden="true" />
                 Back to registration
@@ -247,7 +243,7 @@ export default function CheckoutPageClient() {
                     setSignupStep(1);
                     setNotice("");
                   }}
-                  className="font-semibold text-purple-800 hover:underline"
+                  className="font-semibold text-pink-800 hover:underline"
                 >
                   Sign in
                 </button>
@@ -285,13 +281,13 @@ export default function CheckoutPageClient() {
                   <button
                     type="button"
                     onClick={() => setNotice("Password reset is not available until account services are connected.")}
-                    className="font-medium text-purple-800 hover:underline"
+                    className="font-medium text-pink-800 hover:underline"
                   >
                     Forgot password?
                   </button>
                 </div>
                 {notice && <p role="status" className="rounded-md bg-amber-50 p-3 text-sm text-amber-900">{notice}</p>}
-                <button type="submit" className="w-full rounded-lg px-4 py-3 text-sm font-semibold text-white shadow-md transition hover:opacity-90" style={{ backgroundColor: purple }}>
+                <button type="submit" className="w-full rounded-lg px-4 py-3 text-sm font-semibold text-white shadow-md transition hover:opacity-90" style={{ backgroundColor: brandColor }}>
                   Sign In
                 </button>
               </form>
@@ -305,7 +301,7 @@ export default function CheckoutPageClient() {
                     setSignupStep(1);
                     setNotice("");
                   }}
-                  className="font-semibold text-purple-800 hover:underline"
+                  className="font-semibold text-pink-800 hover:underline"
                 >
                   Register here
                 </button>
@@ -335,7 +331,7 @@ export default function CheckoutPageClient() {
                   type="button"
                   onClick={() => setContactMode("guest")}
                   aria-pressed
-                  className="rounded-md border border-purple-400 bg-purple-50/40 p-3 text-left transition"
+                  className="rounded-md border border-pink-400 bg-pink-50/40 p-3 text-left transition"
                 >
                   <span className="block text-xs font-semibold text-gray-900">Continue as guest</span>
                   <span className="mt-1 block text-[11px] text-gray-500">No account required</span>
@@ -360,8 +356,8 @@ export default function CheckoutPageClient() {
                   <input className={inputClass} name="fullName" autoComplete="name" placeholder="Jane Guest" required />
                 </label>
                 <label className={labelClass}>
-                  US phone
-                  <input className={inputClass} type="tel" name="phone" autoComplete="tel" placeholder="(415) 555-2671" required />
+                  Phone
+                  <input className={inputClass} type="tel" name="phone" autoComplete="tel" placeholder="+977 98XXXXXXXX" required />
                 </label>
               </div>
             </section>
@@ -398,11 +394,11 @@ export default function CheckoutPageClient() {
             <section className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
               <h2 className="mb-3 text-sm font-bold text-gray-900">Billing address</h2>
               <div className="grid gap-2 sm:grid-cols-2">
-                <label className={`flex cursor-pointer items-center gap-2 rounded-md border p-3 text-xs ${!billingDifferent ? "border-purple-400 bg-purple-50/40" : "border-gray-200"}`}>
+                <label className={`flex cursor-pointer items-center gap-2 rounded-md border p-3 text-xs ${!billingDifferent ? "border-pink-400 bg-pink-50/40" : "border-gray-200"}`}>
                   <input type="radio" name="billing" checked={!billingDifferent} onChange={() => setBillingDifferent(false)} />
                   Same as shipping
                 </label>
-                <label className={`flex cursor-pointer items-center gap-2 rounded-md border p-3 text-xs ${billingDifferent ? "border-purple-400 bg-purple-50/40" : "border-gray-200"}`}>
+                <label className={`flex cursor-pointer items-center gap-2 rounded-md border p-3 text-xs ${billingDifferent ? "border-pink-400 bg-pink-50/40" : "border-gray-200"}`}>
                   <input type="radio" name="billing" checked={billingDifferent} onChange={() => setBillingDifferent(true)} />
                   Different address
                 </label>
@@ -436,7 +432,7 @@ export default function CheckoutPageClient() {
 
             <section className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
               <h2 className="text-sm font-bold text-gray-900">Shipping method</h2>
-              <label className="mt-3 flex items-center justify-between gap-3 rounded-md border border-purple-400 bg-purple-50/40 p-3 text-xs">
+              <label className="mt-3 flex items-center justify-between gap-3 rounded-md border border-pink-400 bg-pink-50/40 p-3 text-xs">
                 <span className="flex items-center gap-2">
                   <input type="radio" name="shippingMethod" defaultChecked />
                   <span><strong className="block text-gray-900">Standard shipping</strong><span className="mt-1 block text-gray-500">Estimated 4–6 business days</span></span>
@@ -447,8 +443,8 @@ export default function CheckoutPageClient() {
 
             <section className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
               <h2 className="text-sm font-bold text-gray-900">Payment</h2>
-              <div className="mt-3 flex items-center gap-3 rounded-md border border-purple-400 bg-purple-50/40 p-3">
-                <i className="far fa-credit-card text-purple-700" aria-hidden="true" />
+              <div className="mt-3 flex items-center gap-3 rounded-md border border-pink-400 bg-pink-50/40 p-3">
+                <i className="far fa-credit-card text-pink-700" aria-hidden="true" />
                 <div>
                   <p className="text-xs font-semibold text-gray-900">Pay with card</p>
                   <p className="mt-1 text-[11px] text-gray-500">Online card payment is not set up yet.</p>
@@ -477,7 +473,7 @@ export default function CheckoutPageClient() {
                     <p className="mt-0.5 text-[11px] text-gray-500">Qty {quantity}</p>
                   </div>
                   <span className="shrink-0 text-xs font-medium text-gray-900">
-                    {formatPrice(priceOf(product.price) * quantity)}
+                    {formatPrice(priceNumber(product.price) * quantity)}
                   </span>
                 </li>
               ))}
@@ -489,10 +485,10 @@ export default function CheckoutPageClient() {
             </div>
             <p className="mt-4 text-[11px] text-gray-500">Review your contact and shipping details before continuing.</p>
             {notice && <p role="status" className="mt-3 rounded-md bg-amber-50 p-3 text-xs text-amber-900">{notice}</p>}
-            <button type="submit" className="mt-4 w-full rounded-lg px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90" style={{ backgroundColor: purple }}>
+            <button type="submit" className="mt-4 w-full rounded-lg px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90" style={{ backgroundColor: brandColor }}>
               Continue to payment
             </button>
-            <Link href="/cart" className="mt-3 block text-center text-xs font-medium text-gray-600 hover:text-purple-700">
+            <Link href="/cart" className="mt-3 block text-center text-xs font-medium text-gray-600 hover:text-pink-700">
               Back to cart
             </Link>
           </aside>

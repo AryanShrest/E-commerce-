@@ -6,8 +6,8 @@ import MobileBottomNav from "./components/MobileBottomNav";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Zymowine.com - The Science of Fine Wine",
-  description: "Curating the finest wines from around the world.",
+  title: "Zymowine.com - Beauty Essentials",
+  description: "Shop makeup, skincare, hair care and body essentials from trusted brands.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
